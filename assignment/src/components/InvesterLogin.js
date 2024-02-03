@@ -1,10 +1,13 @@
+import { useRoutes } from "react-router-dom";
 import "./InvesterLogin.css";
 import { useState } from "react";
+import InvesterDashboard from "../pages/InvesterDashboard"
 
 
 function InvesterLogin(props) {
 const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isloggedin,setIsloggedin] =useState(false);
 
   const handleSignUpClick = () => {
     props.set(true);
@@ -12,7 +15,7 @@ const [email, setEmail] = useState('');
 
   const handleSignInClick = async () => {
     try {
-      const response = await fetch('http://localhost:4000/assignment/src/components/InvesterLogin.js', {
+      const response = await fetch('http://localhost:4000/assignment/src/components/InvesterLogin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -24,6 +27,7 @@ const [email, setEmail] = useState('');
 
       if (response.ok) {
         // Successful login
+        setIsloggedin(true);
         alert(responseData.message);
       } else {
         // Incorrect credentials
@@ -35,7 +39,10 @@ const [email, setEmail] = useState('');
   };
 
   return (
-    <div className="InvesterLogin"> 
+
+    <div>
+      {(isloggedin===true)? <InvesterDashboard email={email} password={password}/> : 
+      <div className="InvesterLogin"> 
       <form className="form">
         <p className="form-title">Sign in to your account</p>
         <div className="input-container">
@@ -55,7 +62,9 @@ const [email, setEmail] = useState('');
           <a href="#" onClick={handleSignUpClick}>Sign up</a>
         </p>
       </form>
+    </div>}
     </div>
+    
   );
 }
 

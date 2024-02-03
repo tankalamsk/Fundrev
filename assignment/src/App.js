@@ -14,7 +14,6 @@ function App() {
           <Route path="/" element= {<Home/>}/>
           <Route path = "/Invester" element={<Invester/>}/>
           <Route path = "/Startup" element = {<Startup/>}/>
-          <Route path = "/StartupDashboard" element ={<StartupDashboard/>}/>
           <Route path="*" element ={<h1>no page found</h1>}/>
         </Routes>
       </Router>
